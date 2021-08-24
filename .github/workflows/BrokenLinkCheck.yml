@@ -1,0 +1,23 @@
+name: Broken Link Check
+
+on:
+  push:
+    branches: [ LSW, PYH, LKZ, TKM, LJE ]
+  pull_request:
+    branches: [ gh-pages ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Broken Link Check
+        uses: celinekurpershoek/link-checker@v1.0.0
+        with:
+          url: 'https://leesiangwei.github.io/scc/'
+          honorRobotExclusions: false
+          ignorePatterns: ''
+          recursiveLinks: true   
+      - name: Get the result
+        run: echo "${{steps.link-report.outputs.result}}"
