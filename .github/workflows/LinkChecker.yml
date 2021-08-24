@@ -1,0 +1,18 @@
+name: Link Checker
+
+on:
+  push:
+    branches: [ LSW, PYH, LKZ, TKM, LJE ]
+  pull_request:
+    branches: [ gh-pages ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Link Checker
+        uses: peter-evans/link-checker@v1.2.2
+        with:
+          args: -v -r *
